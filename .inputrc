@@ -1,0 +1,7 @@
+# Tab completion is case insensitive
+set completion-ignore-case On
+
+# Tab completion cycles through stuff
+"\C-i": menu-complete
+
+
