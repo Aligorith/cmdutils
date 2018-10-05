@@ -25,7 +25,7 @@ def is_adobe_rgb(img):
 def adobe_to_srgb(img):
 	srgb = ImageCms.createProfile('sRGB')
 	
-	icc = open(r'C:\Users\Joshua\cmdutils\AdobeRGB.icc')
+	icc = open(r'C:\Users\Joshua\cmdutils\AdobeRGB.icc', 'rb')
 	#icc = open('AdobeRGB.icc')
 	 	
 	img = ImageCms.profileToProfile(img, icc, srgb)
@@ -45,7 +45,7 @@ def find_images(path):
 
 if len(sys.argv) > 1:
 	# Check on each path supplied...
-	print "Checking supplied paths..."
+	print("Checking supplied paths...")
 	images = []
 
 	for path in sys.argv[1:]:
@@ -58,26 +58,26 @@ if len(sys.argv) > 1:
 			# TODO: Check that a corresponding file actually exists..
 			path = "_MG_%s.JPG" % (path)
 			if not os.path.exists(path):
-				print "   ERROR: '%s' does not exist" % (path)
+				print("   ERROR: '%s' does not exist" % (path))
 			else:
 				images.append(path)
 		elif not os.path.exists(path):
 			# Invalid Filename
-			print "  ERROR: '%s' is not a valid path" % (path)
+			print("  ERROR: '%s' is not a valid path" % (path))
 		else:
 			# Valid Filename - Assume that this is an image
 			# TODO: Check that it is an image...
 			images.append(path)
 else:
 	# Hunt for picasa exports / camera raw exports
-	print "Finding images..."
+	print("Finding images...")
 	images = find_images('.')
 	
-print "\n\nFound %d Images:\n   %s\n\n" % (len(images), images)
+print("\n\nFound %d Images:\n   %s\n\n" % (len(images), images))
 if len(images) == 0:  sys.exit(1)
 
 for fileN in images:
-	print "Converting ==> '%s'" % (fileN)
+	print("Converting ==> '%s'" % (fileN))
 	
 	# Open the file for conversion
 	img = Image.open(fileN)
