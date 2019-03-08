@@ -28,7 +28,7 @@ else:
 		# Remove offending lines
 		def filter_vlc_playlist_nops(line):
 			line = line.strip()
-			return not (line.startswith("<vlc:node ") or line.startswith("</vlc:node "))
+			return not (line.startswith("<vlc:node ") or line.startswith("</vlc:node>"))
 		lines = list(filter(filter_vlc_playlist_nops, lines))
 		
 		# Backup the old file in case this goes wrong (or it gets cancelled mid-write)
