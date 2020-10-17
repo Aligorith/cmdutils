@@ -32,6 +32,7 @@ if not os.path.exists(OUT_DIR):
 	print("  OutDir Exists?   %s" % os.path.exists(OUT_DIR))
 
 # Process each file
+# FIXME: Has issues with 'ú' in filenames (FFMPEG + Others)
 with open(IN_FILE) as f:
 	for line in f:
 		line = line.strip()
@@ -51,7 +52,7 @@ with open(IN_FILE) as f:
 		else:
 			# Convert file formats
 			old_filename = line
-			new_filename = line.rsplit('.')[0] + '.mp3'
+			new_filename = os.path.splitext()[0] + '.mp3'
 			new_filepath = os.path.join(OUT_DIR, new_filename)
 			
 			print("Converting '%s' => '%s'..." % (old_filename, new_filepath))
