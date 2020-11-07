@@ -12,6 +12,8 @@ import os
 import subprocess
 import shutil
 
+from urllib.parse import unquote
+
 # Get input and output destinations
 try:
 	args = sys.argv[1:]
@@ -35,7 +37,8 @@ if not os.path.exists(OUT_DIR):
 # FIXME: Has issues with 'ú' in filenames (FFMPEG + Others)
 with open(IN_FILE) as f:
 	for line in f:
-		line = line.strip()
+		# Note: If this was a "proper" m3u file, this may in fact be an encoded URL in places...
+		line = unquote(line.strip())
 		
 		if len(line) == 0 or line[0] == "#":
 			# Blank / Comment Line
@@ -52,7 +55,7 @@ with open(IN_FILE) as f:
 		else:
 			# Convert file formats
 			old_filename = line
-			new_filename = os.path.splitext()[0] + '.mp3'
+			new_filename = os.path.splitext(line)[0] + '.mp3'
 			new_filepath = os.path.join(OUT_DIR, new_filename)
 			
 			print("Converting '%s' => '%s'..." % (old_filename, new_filepath))
