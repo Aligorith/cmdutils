@@ -1,2 +1,2 @@
 @echo off
-youtube-dl %*
+yt-dlp %*
