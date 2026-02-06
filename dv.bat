@@ -1,2 +1,2 @@
 @echo off
-yt-dlp %*
+yt-dlp --embed-chapters --embed-thumbnail %*
