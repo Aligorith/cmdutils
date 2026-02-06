@@ -1,0 +1,5 @@
+# yt-dlp config for Facebook Extractor
+
+--replace-in-metadata title "^[0-9.,]+[KMB]?\s+views\s+.*\s+[0-9.,]+[KMB]?\s+reactions\s*\|\s" ""
+--replace-in-metadata title "[:\\/]" " -- "
+-o "%(uploader)s-%(upload_date)s-%(title).120s.%(id)s.%(ext)s"
